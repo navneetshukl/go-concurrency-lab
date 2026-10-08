@@ -7,6 +7,9 @@ This repository contains implementations of various concurrency patterns and pro
 ```
 machine-coding/
 ├── Fan-In-Fan-out/          # Fan-In / Fan-Out pattern
+├── Thread-Safe-Queue/       # Thread-safe bounded queue with condition variables
+│   ├── correct-solution/    # Working implementation
+│   └── my-solution/         # Initial attempt (with bugs noted)
 └── Worker-Pattern/          # Worker pool pattern
 ```
 
