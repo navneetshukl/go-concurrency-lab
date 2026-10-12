@@ -81,3 +81,22 @@ func (this *LRUCache) Put(key int, value int) {
 		this.mp[key] = no
 	}
 }
+
+func main() {
+	// Test case:
+	// ["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"]
+	// [[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]
+	// Expected: [null, null, null, 1, null, -1, null, -1, 3, 4]
+
+	cache := Constructor(2)
+	
+	cache.Put(1, 1)
+	cache.Put(2, 2)
+	println(cache.Get(1)) // 1
+	cache.Put(3, 3)
+	println(cache.Get(2)) // -1
+	cache.Put(4, 4)
+	println(cache.Get(1)) // -1
+	println(cache.Get(3)) // 3
+	println(cache.Get(4)) // 4
+}
