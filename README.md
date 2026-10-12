@@ -7,6 +7,7 @@ This repository contains implementations of various concurrency patterns and pro
 ```
 machine-coding/
 ├── Fan-In-Fan-out/          # Fan-In / Fan-Out pattern
+├── LRU-Cache/               # LRU Cache implementation
 ├── Thread-Safe-Queue/       # Thread-safe bounded queue with condition variables
 │   ├── correct-solution/    # Working implementation
 │   └── my-solution/         # Initial attempt (with bugs noted)
@@ -76,6 +77,31 @@ cd Worker-Pattern && go run main.go
 
 ---
 
+### 4. LRU Cache (`LRU-Cache/`)
+
+**Concept**: Least Recently Used (LRU) Cache implementation using a combination of a hash map and a doubly linked list for O(1) get and put operations.
+
+**Key Features**:
+- O(1) time complexity for both `Get` and `Put` operations
+- Doubly linked list to maintain access order (most recently used at head, least recently used at tail)
+- Hash map for O(1) key lookup
+- Dummy head and tail nodes to simplify edge cases
+- Automatic eviction of least recently used item when capacity is reached
+
+**Run**:
+```bash
+cd LRU-Cache && go run main.go
+```
+
+**Test Case** (from LeetCode 146):
+```go
+// ["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"]
+// [[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]
+// Expected: [null, null, null, 1, null, -1, null, -1, 3, 4]
+```
+
+---
+
 ## 🎯 Learning Objectives
 
 This repository demonstrates:
@@ -83,6 +109,7 @@ This repository demonstrates:
 | Pattern | Go Concepts Used |
 |---------|------------------|
 | Fan-In/Fan-Out | Channels, goroutines, `sync.WaitGroup`, pipeline pattern |
+| LRU Cache | Hash map, doubly linked list, pointer manipulation, O(1) operations |
 | Thread-Safe Queue | `sync.Mutex`, `sync.Cond`, condition variables, blocking operations |
 | Worker Pool | Channels, goroutines, `sync.WaitGroup`, job/result structs |
 
@@ -96,7 +123,7 @@ This repository demonstrates:
 
 ```bash
 # Run each pattern
-for dir in Fan-In-Fan-out Thread-Safe-Queue/correct-solution Worker-Pattern; do
+for dir in Fan-In-Fan-out LRU-Cache Thread-Safe-Queue/correct-solution Worker-Pattern; do
   echo "=== Running $dir ==="
   (cd "$dir" && go run main.go)
   echo
